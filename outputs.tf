@@ -53,11 +53,11 @@ output "api_gateway_domain_names_endpoint_access_mode" {
 }
 output "api_gateway_domain_names_endpoint_configuration" {
   description = "Map of endpoint_configuration values across all api_gateway_domain_names, keyed the same as var.api_gateway_domain_names"
-  value       = { for k, v in aws_api_gateway_domain_name.api_gateway_domain_names : k => v.endpoint_configuration if v.endpoint_configuration != null && length(v.endpoint_configuration) > 0 }
+  value       = { for k, v in aws_api_gateway_domain_name.api_gateway_domain_names : k => one(v.endpoint_configuration) if v.endpoint_configuration != null && length(v.endpoint_configuration) > 0 }
 }
 output "api_gateway_domain_names_mutual_tls_authentication" {
   description = "Map of mutual_tls_authentication values across all api_gateway_domain_names, keyed the same as var.api_gateway_domain_names"
-  value       = { for k, v in aws_api_gateway_domain_name.api_gateway_domain_names : k => v.mutual_tls_authentication if v.mutual_tls_authentication != null && length(v.mutual_tls_authentication) > 0 }
+  value       = { for k, v in aws_api_gateway_domain_name.api_gateway_domain_names : k => one(v.mutual_tls_authentication) if v.mutual_tls_authentication != null && length(v.mutual_tls_authentication) > 0 }
 }
 output "api_gateway_domain_names_ownership_verification_certificate_arn" {
   description = "Map of ownership_verification_certificate_arn values across all api_gateway_domain_names, keyed the same as var.api_gateway_domain_names"
